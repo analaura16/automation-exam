@@ -5,9 +5,12 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
 
@@ -43,4 +46,12 @@ public class PageBase {
 		
 	}
 	
+	
+	public static void waitForElementPresent(String xpath) {
+		
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+		
+		
+	}
 }
