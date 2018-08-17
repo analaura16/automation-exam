@@ -50,7 +50,7 @@ public class PageBase {
 	public static void waitForElementPresent(String xpath) {
 		
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 		
 		
 	}

@@ -21,7 +21,7 @@ public class TestCase extends PageBase {
 	}
 	
 	@Test
-	public void runTest() {
+	public void runTest() throws InterruptedException {
 		
 		// 1- Enter to Ebay
 		// * Set language to English --> DONE
@@ -45,26 +45,23 @@ public class TestCase extends PageBase {
 		System.out.println("Number of Results: " + numberOfResults);
 		
 		// 6- Order by price ascendant --> DONE
+		// 7- Assert the order taking the first 5 results
 		String orderBy = "Price + Shipping: lowest first";
 		ListingPage.orderResultsBy(orderBy);
 		
-		// 7- Assert the order taking the first 5 results
+		// 8- Take the first 5 products with their prices and print them in console. -- DONE
+		ListingPage.printItems(5);
 		
-		// ******************************************
-		// ***********   CONTINUE HERE  ************
-		// ******************************************
+		// 9- Order and print the products by name (ascendant) --> DONE
+		ListingPage.orderAndPrintItems("Name", true, 5);
 		
+		// 10- Order and print the products by price in descendant mode --> DONE
+		ListingPage.orderAndPrintItems("Price", false, 5);
 		
-		
-		
-		
-		// 8- Take the first 5 products with their prices and print them in console.
-		// 9- Order and print the products by name (ascendant)
-		// 10- Order and print the products by price in descendant mode
 		// 11- Repository must be created in any git place (github, bitbucket, etc)
 		// 12- Code must run in any CI tool.
 		// 13- Report should be sent by mail.
-
+	
 		
 	}
 	
