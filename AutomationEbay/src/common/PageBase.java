@@ -37,7 +37,6 @@ public class PageBase {
 		options.addArguments("disable-infobars");  // With chromedriver 2.28, there's an info bar that we don't want to have when browser is launched
 		
 		driver = new ChromeDriver(options);		
-	    // driver = new ChromeDriver();
 		
 		driver.get(url);
 		driver.manage().window().maximize();

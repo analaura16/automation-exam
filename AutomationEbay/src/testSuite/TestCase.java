@@ -42,14 +42,14 @@ public class TestCase extends PageBase {
 		
 		// 5- Print the number of results --> DONE
 		String numberOfResults = ListingPage.getNumberOfResults();
-		System.out.println("Number of Results: " + numberOfResults);
+		System.out.println("\nNumber of Results: " + numberOfResults + "\n");
 		
 		// 6- Order by price ascendant --> DONE
 		// 7- Assert the order taking the first 5 results
 		String orderBy = "Price + Shipping: lowest first";
 		ListingPage.orderResultsBy(orderBy);
 		
-		// 8- Take the first 5 products with their prices and print them in console. -- DONE
+		// 8- Take the first 5 products with their prices and print them in console. --> DONE
 		ListingPage.printItems(5);
 		
 		// 9- Order and print the products by name (ascendant) --> DONE
@@ -58,8 +58,14 @@ public class TestCase extends PageBase {
 		// 10- Order and print the products by price in descendant mode --> DONE
 		ListingPage.orderAndPrintItems("Price", false, 5);
 		
-		// 11- Repository must be created in any git place (github, bitbucket, etc)
-		// 12- Code must run in any CI tool.
+		// 11- Repository must be created in any git place (github, bitbucket, etc) --> DONE
+		
+		// 12- Code must run in any CI tool. --
+		
+		// ********** CONTINUE HERE *******************
+		// ADD XML TO RUN TEST CASE, RUN IT IN JENKINS
+		// ******************************************
+		
 		// 13- Report should be sent by mail.
 	
 		
@@ -68,8 +74,8 @@ public class TestCase extends PageBase {
 	@AfterClass
 	public void finishTest() {
 		
-		System.out.println("Close Browser.");		
-	    JOptionPane.showMessageDialog(frame, "Select OK to stop the webdriver and browser.");
+		System.out.println("Test finished.");		
+	    JOptionPane.showMessageDialog(frame, "Test finished.");
 		driver.close();
 		driver.quit();
 		

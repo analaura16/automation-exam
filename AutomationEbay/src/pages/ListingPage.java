@@ -15,7 +15,7 @@ public class ListingPage extends PageBase {
 
 	public static void selectSubCategory(String subCategory, String value) throws InterruptedException {
 		
-		System.out.println("Subcategory: " + subCategory + ", Value: "+ value);
+		System.out.println("Subcategory to select: " + subCategory + ", Value: "+ value);
 		
 		if (subCategory.equals("Brand")) {
 			
@@ -80,7 +80,7 @@ public class ListingPage extends PageBase {
 			
 		}
 		
-		System.out.println("Prices found:");
+		/*System.out.println("Prices found:");
 		for (int i = 0; i < 5; i++) {
 			
 			System.out.println(pricesSortedFound.get(i));
@@ -92,28 +92,20 @@ public class ListingPage extends PageBase {
 			
 			System.out.println(pricesSortedExpected.get(i));
 						
-		}
+		}*/
 		
 		Collections.sort(pricesSortedFound);
 	
 		Assert.assertEquals(pricesSortedFound, pricesSortedExpected);
-		System.out.println("Items were sorted by price correctly");
+		System.out.println("Items were sorted by " + orderBy + " correctly");
 	}
 
 
 	public static void printItems(int amount) {
-		/*
-		String xpathItems = "//ul/li/div[@class='s-item__wrapper clearfix']/div[2]/a/h3[@class='s-item__title']";
-		String xpathListOfPrices = "//ul/li/div[@class='s-item__wrapper clearfix']/div[2]/div/div/span[@class='s-item__price']";
 		
-		List<WebElement> listItems = driver.findElements(By.xpath(xpathItems));
-		List<WebElement> listItemPrices = driver.findElements(By.xpath(xpathListOfPrices));
-		*/
+		List<Product> listItems = getItemsFromList(amount);
 		
-		List<Product> listItems = getItemsFromList();
-		//List<WebElement> listItemPrices = getPricesFromList();
-		
-		System.out.println("The first " + amount + " items are: ");
+		System.out.println("\nThe first " + amount + " items are: ");
 		
 		for (int i = 0; i < amount; i++) {
 			
@@ -127,8 +119,7 @@ public class ListingPage extends PageBase {
 
 	public static void orderAndPrintItems(String sortBy, boolean asc, int amount) {
 		
-		//List<WebElement> listItems = new ArrayList<>();
-		List<Product> listProducts = getItemsFromList();
+		List<Product> listProducts = getItemsFromList(amount);
 		
 		if (sortBy.equals("Name") && asc == true ) {
 			
@@ -151,7 +142,7 @@ public class ListingPage extends PageBase {
 		String ascending = "ascending";
 		if (!asc) ascending = "descending"; 
 		
-		System.out.println("Products sorted by " + sortBy + " in " + ascending + " order");
+		System.out.println("\nProducts sorted by " + sortBy + " in " + ascending + " order\n");
 		
 		for (Product p: listProducts) {
 			
@@ -161,50 +152,10 @@ public class ListingPage extends PageBase {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		/*
-		List<String> itemsToBeSorted = new ArrayList<>();
-		
-		if (orderBy.equals("Name")) {
-			
-		} else if (orderBy.equals("Price")) {
-		
-			
-		}
-		
-		
-		for (WebElement e: listItems) {
-			
-			itemsToBeSorted.add(e.getText());
-			
-		}
-		
-		Collections.sort(itemsToBeSorted);
-		String ascending = "ascending";
-		
-		if (asc == false) {
-			Collections.reverse(itemsToBeSorted);
-			ascending = "descending";
-		}
-			
-		
-		System.out.println("Items sorted by " + orderBy + " in " + ascending + " order");
-		
-		for (String s: itemsToBeSorted) {
-			
-			System.out.println(s);
-			
-		}
-		*/
 	}
 	
 	
-	private static List<Product> getItemsFromList() {
+	private static List<Product> getItemsFromList(int amount) {
 		
 		String xpathItems = "//ul/li/div[@class='s-item__wrapper clearfix']/div[2]/a/h3[@class='s-item__title']";
 		List<WebElement> listItemNames = driver.findElements(By.xpath(xpathItems));
@@ -217,7 +168,7 @@ public class ListingPage extends PageBase {
 		
 		List<Product> listProducts = new ArrayList<>();
 		
-		for (int i = 0; i < listItemNames.size(); i++) {
+		for (int i = 0; i < amount; i++) {
 			
 			Product p = new Product();
 
@@ -242,17 +193,6 @@ public class ListingPage extends PageBase {
 		return listProducts;
 		
 	}
-	
-	// To be removed - won't be used 
-	private static List<WebElement> getPricesFromList() {
-		
-		String xpathListOfPrices = "//ul/li/div[@class='s-item__wrapper clearfix']/div[2]/div/div/span[@class='s-item__price']";
-		List<WebElement> listItemPrices = driver.findElements(By.xpath(xpathListOfPrices));
-		
-		return listItemPrices;
-		
-	}
-
 	
 	
 }

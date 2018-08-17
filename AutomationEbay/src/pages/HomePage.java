@@ -11,8 +11,7 @@ public class HomePage extends PageBase {
 	public static void changeLanguage(String lang) {
 		
 		String currentLanguage = driver.findElement(By.xpath("//*[@id='gh-eb-Geo-a-default']/span[2]")).getText();
-		System.out.println("currentLanguage: " + currentLanguage);
-		
+				
 		// If the current language is not 'lang' (e.g.:'English'), then select lang from dropdown list
 		if (!currentLanguage.equals(lang)) {
 			
