@@ -8,6 +8,8 @@ import common.PageBase;
 
 public class HomePage extends PageBase {
 
+	
+	// Change language of the Web site to "lang"
 	public static void changeLanguage(String lang) {
 		
 		String currentLanguage = driver.findElement(By.xpath("//*[@id='gh-eb-Geo-a-default']/span[2]")).getText();
@@ -30,6 +32,7 @@ public class HomePage extends PageBase {
 	}
 	
 	
+	// Search products by "value" specified
 	public static void searchBy(String value) {
 		
 		String xpathInput = "//input[@id='gh-ac']";

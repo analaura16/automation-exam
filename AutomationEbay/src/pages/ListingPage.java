@@ -13,6 +13,8 @@ import entities.Product;
 
 public class ListingPage extends PageBase {
 
+	
+	// Filter results on UI by selecting a "value" in the "subCategory" specified
 	public static void selectSubCategory(String subCategory, String value) throws InterruptedException {
 		
 		System.out.println("Subcategory to select: " + subCategory + ", Value: "+ value);
@@ -45,7 +47,7 @@ public class ListingPage extends PageBase {
 		
 	}
 
-	
+	// Gets the total number of results found, according to the filters selected
 	public static String getNumberOfResults() {
 		
 		String xpathResults = "//h1[@class='srp-controls__count-heading']";
@@ -55,7 +57,8 @@ public class ListingPage extends PageBase {
 		
 	}
 
-
+ 
+	// Order the results in the UI by the criteria specified by "orderBy" parameter
 	public static void orderResultsBy(String orderBy) {
 		
 		String xpathDropdown = "//button[@id='srp-river-results-SEARCH_STATUS_MODEL_V2-w0-w1_btn']"; 
@@ -76,7 +79,7 @@ public class ListingPage extends PageBase {
 		
 		for (int i = 0; i < 5; i++) {
 		
-			double shippingPrice = Double.parseDouble(getShippingPrice(listShippingPrices.get(i).getText().replace("$", "").replace("+", "").replace("shipping", "").trim()));
+			double shippingPrice = Double.parseDouble(getShippingPrice(listShippingPrices.get(i).getText()));
 					
 			double itemPrice = Double.parseDouble(listItemPrices.get(i).getText().replace("$", "").trim());
 			double itemPriceWithShipping = itemPrice + shippingPrice;
@@ -86,27 +89,16 @@ public class ListingPage extends PageBase {
 			
 		}
 		
-		/*System.out.println("Prices found:");
-		for (int i = 0; i < 5; i++) {
-			
-			System.out.println(pricesSortedFound.get(i));
-						
-		}
-		
-		System.out.println("Prices expected:");
-		for (int i = 0; i < 5; i++) {
-			
-			System.out.println(pricesSortedExpected.get(i));
-						
-		}*/
-		
 		Collections.sort(pricesSortedFound);
 	
 		Assert.assertEquals(pricesSortedFound, pricesSortedExpected);
 		System.out.println("Items were sorted by " + orderBy + " correctly");
+		
 	}
 
-
+	// Get the value of the shipping price, and get rid off any non numeric value
+	// E.g.: For "+$5.99 shipping", return just "5.99"
+	// If "Free International Shipping" is found, then return "0"
 	private static String getShippingPrice(String longShippingPrice) {
 		
 		String shippingPrice = longShippingPrice.replace("$", "").replace("+", "").replace("shipping", "").trim();
@@ -115,6 +107,7 @@ public class ListingPage extends PageBase {
 			shippingPrice = "0";
 		
 		return shippingPrice;
+		
 	}
 
 
@@ -135,6 +128,7 @@ public class ListingPage extends PageBase {
 	}
 
 
+	// Order items by "sortBy", in ascending/descending order 
 	public static void orderAndPrintItems(String sortBy, boolean asc, int amount) {
 		
 		List<Product> listProducts = getItemsFromList(amount);
@@ -172,7 +166,7 @@ public class ListingPage extends PageBase {
 		
 	}
 	
-	
+	// Get from UI the amount of items indicated by "amount" and put them in a list
 	private static List<Product> getItemsFromList(int amount) {
 		
 		String xpathItems = "//ul/li/div[@class='s-item__wrapper clearfix']/div[2]/a/h3[@class='s-item__title']";
@@ -192,14 +186,8 @@ public class ListingPage extends PageBase {
 
 			String name = listItemNames.get(i).getText();
 			double price = Double.parseDouble(listItemPrices.get(i).getText().replace("$", "").split("to")[0].trim());
-			double shippingPrice = 0;
-			
-			try {
-				shippingPrice = Double.parseDouble(listShippingPrices.get(i).getText().replace("$", "").replace("+", "").replace("shipping", "").trim());
-			} catch (NumberFormatException e) {
-				shippingPrice = 0;
-			}
-			
+			double shippingPrice = Double.parseDouble(getShippingPrice(listShippingPrices.get(i).getText()));
+						
 			p.setName(name);
 			p.setPrice(price);
 			p.setShippingPrice(shippingPrice);

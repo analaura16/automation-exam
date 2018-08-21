@@ -16,6 +16,8 @@ public class TestCase extends PageBase {
 	@BeforeClass
 	public void setUp() throws Exception {
 		
+		// Set up Chrome driver
+		// 1- Enter to Ebay
 		setUpDriver();
 		
 	}
@@ -23,7 +25,6 @@ public class TestCase extends PageBase {
 	@Test
 	public void runTest() throws InterruptedException {
 		
-		// 1- Enter to Ebay
 		// * Set language to English
 		HomePage.changeLanguage("English");
 		
@@ -49,7 +50,7 @@ public class TestCase extends PageBase {
 		String orderBy = "Price + Shipping: lowest first";
 		ListingPage.orderResultsBy(orderBy);
 		
-		// 8- Take the first 5 products with their prices and print them in console. --> DONE
+		// 8- Take the first 5 products with their prices and print them in console.
 		ListingPage.printItems(5);
 		
 		// 9- Order and print the products by name (ascendant)
@@ -59,10 +60,7 @@ public class TestCase extends PageBase {
 		ListingPage.orderAndPrintItems("Price", false, 5);
 		
 		// 11- Repository must be created in any git place (github, bitbucket, etc)
-		
 		// 12- Code must run in any CI tool. --
-			
-		// 13- Report should be sent by mail.
 	
 		
 	}
