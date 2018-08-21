@@ -17,9 +17,15 @@ public class ListingPage extends PageBase {
 		
 		System.out.println("Subcategory to select: " + subCategory + ", Value: "+ value);
 		
-		if (subCategory.equals("Brand")) {
+		String xpathCheckbox = "//ul[@class='x-refine__main__value']/li/div/a/span[text()='" + value + "']";
+		waitForElementPresent(xpathCheckbox);
+		driver.findElement(By.xpath(xpathCheckbox)).click();		
+		
+		// Old code - Brand used to have a search box to type in the brand to filter by
+		/*if (subCategory.equals("Brand")) {
 			
 			String xpathSearchBox = "//input[@class='x-searchable-list__textbox__aspect-Brand']";
+			
 			driver.findElement(By.xpath(xpathSearchBox)).clear();
 			driver.findElement(By.xpath(xpathSearchBox)).sendKeys(value);
 			
@@ -31,10 +37,10 @@ public class ListingPage extends PageBase {
 			
 		} else if (subCategory.equals("US Shoe Size (Men's)")) {
 			
-			String xpathCheckBox = "//ul[@class='x-refine__main__value']/li/div/a/span[text()='" + value + "']";
-			driver.findElement(By.xpath(xpathCheckBox)).click();
+			String xpathCheckbox = "//ul[@class='x-refine__main__value']/li/div/a/span[text()='" + value + "']";
+			driver.findElement(By.xpath(xpathCheckbox)).click();
 			
-		}
+		}*/
 		
 		
 	}
@@ -70,7 +76,7 @@ public class ListingPage extends PageBase {
 		
 		for (int i = 0; i < 5; i++) {
 		
-			double shippingPrice = Double.parseDouble(listShippingPrices.get(i).getText().replace("$", "").replace("+", "").replace("shipping", "").trim());
+			double shippingPrice = Double.parseDouble(getShippingPrice(listShippingPrices.get(i).getText().replace("$", "").replace("+", "").replace("shipping", "").trim()));
 					
 			double itemPrice = Double.parseDouble(listItemPrices.get(i).getText().replace("$", "").trim());
 			double itemPriceWithShipping = itemPrice + shippingPrice;
@@ -101,6 +107,18 @@ public class ListingPage extends PageBase {
 	}
 
 
+	private static String getShippingPrice(String longShippingPrice) {
+		
+		String shippingPrice = longShippingPrice.replace("$", "").replace("+", "").replace("shipping", "").trim();
+		
+		if (longShippingPrice.equals("Free International Shipping"))
+			shippingPrice = "0";
+		
+		return shippingPrice;
+	}
+
+
+	// Print products in console 
 	public static void printItems(int amount) {
 		
 		List<Product> listItems = getItemsFromList(amount);
@@ -109,8 +127,8 @@ public class ListingPage extends PageBase {
 		
 		for (int i = 0; i < amount; i++) {
 			
-			System.out.print("Item: " + listItems.get(i).getName()); //.getText());
-			System.out.println(",  Price: " + listItems.get(i).getPrice()); // Prices.get(i).getText());
+			System.out.print("Item: " + listItems.get(i).getName());
+			System.out.println(",  Price: " + listItems.get(i).getPrice());
 			
 		}
 		

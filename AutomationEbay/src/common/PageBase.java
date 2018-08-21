@@ -33,7 +33,6 @@ public class PageBase {
 		    
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-extensions");
-		options.addArguments("--lang=en"); // language set to English
 		options.addArguments("disable-infobars");  // With chromedriver 2.28, there's an info bar that we don't want to have when browser is launched
 		
 		driver = new ChromeDriver(options);		
