@@ -19,12 +19,12 @@ public class ListingPage extends PageBase {
 		
 		System.out.println("Subcategory to select: " + subCategory + ", Value: "+ value);
 		
-		String xpathCheckbox = "//ul[@class='x-refine__main__value']/li/div/a/span[text()='" + value + "']";
+		/*String xpathCheckbox = "//ul[@class='x-refine__main__value']/li/div/a/span[text()='" + value + "']";
 		waitForElementPresent(xpathCheckbox);
 		driver.findElement(By.xpath(xpathCheckbox)).click();		
-		
+		*/
 		// Old code - Brand used to have a search box to type in the brand to filter by
-		/*if (subCategory.equals("Brand")) {
+		if (subCategory.equals("Brand")) {
 			
 			String xpathSearchBox = "//input[@class='x-searchable-list__textbox__aspect-Brand']";
 			
@@ -42,7 +42,7 @@ public class ListingPage extends PageBase {
 			String xpathCheckbox = "//ul[@class='x-refine__main__value']/li/div/a/span[text()='" + value + "']";
 			driver.findElement(By.xpath(xpathCheckbox)).click();
 			
-		}*/
+		}
 		
 		
 	}
@@ -61,7 +61,7 @@ public class ListingPage extends PageBase {
 	// Order the results in the UI by the criteria specified by "orderBy" parameter
 	public static void orderResultsBy(String orderBy) {
 		
-		String xpathDropdown = "//button[@id='srp-river-results-SEARCH_STATUS_MODEL_V2-w0-w1_btn']"; 
+		String xpathDropdown = "//button[@id='w4-w1_btn']"; // "//button[@id='srp-river-results-SEARCH_STATUS_MODEL_V2-w0-w1_btn']"; 
 		driver.findElement(By.xpath(xpathDropdown)).click();
 		driver.findElement(By.xpath(xpathDropdown)).click();
 	

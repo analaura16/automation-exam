@@ -1,3 +1,3 @@
-java -cp "bin;lib/*" org.testng.TestNG testNG.xml
-
-pause
+cd C:\Users\Ana Laura\git\automation-exam\AutomationEbay
+set classpath=C:\Users\Ana Laura\git\automation-exam\AutomationEbay\bin;C:\Users\Ana Laura\git\automation-exam\AutomationEbay\lib\*;
+java org.testng.TestNG testNG.xml
